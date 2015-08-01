@@ -1,0 +1,36 @@
+# -*- coding: utf-8 -*-
+ 
+from openerp import models, fields, api
+from openerp.exceptions import Warning
+
+class gasto(models.Model):
+    _name = "gasto"
+    _description = "Gasto"
+    name = fields.Char(string='Detalle', required=True)	
+    responsable = fields.Char(compute='_action_responsable', string="Responsable", readonly=True, store=True )	
+    state = fields.Selection([('new','Nuevo'), ('done','Procesado')], string='state', readonly=True)
+    fecha = fields.Date(string='Fecha', required=True)
+    monto = fields.Float(string='Monto:', required=True)
+    notas = fields.Text(string='Información Adicional')	
+#    cierre_id = fields.Many2one(comodel_name='cierre', readonly=True, string='Reporte Diario', delegate=True )
+
+# Default Cierre (Complete automaticamente el campo cierre)
+#    def _action_cierre_gasto(self, cr, uid, context=None):
+#	res = self.pool.get('cierre').search(cr, uid, [('state','=','new')], context=context)
+#	if len(res) > 0:
+#		return res[0]
+#	else:
+#    		raise Warning ("Por favor proceda a crear un cierre de caja")
+#
+#
+    _defaults = {
+    'fecha': fields.Date.today(),
+#    'cierre_id': _action_cierre_gasto,
+    }	
+
+# Nombre del Responsable
+    @api.one
+    @api.depends('name')
+    def _action_responsable(self):
+	self.responsable = str(self.env.user.name)
+

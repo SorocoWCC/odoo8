@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+<!-- Inherit Sales Order Form View -->
+<record model="ir.ui.view" id="sale_view_order_form">
+    <field name="name">sale_view_order_form_heredada</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+        <field name="date_order" position="before">
+      	<field name="mostrar_campos_selection"/>
+        </field>
+		<notebook position="inside" >
+				<page string="Contenedores" attrs="{'invisible':[('mostrar_campos_selection','=','Regular')]}">
+					<group>
+					<field  name="fecha_ingreso" />
+					<field  name="numero_contenedor"/>
+					<field  name="marchamo"/>
+					<field  name="estado"/>
+					</group>
+					<separator string="--------------------------------------------"/>
+					<h3>
+					<label colspan="4" align="0.0" string="Pesaje de Ingreso"/>
+					</h3>
+					<group>
+					<field  name="peso_ingreso_completo"/>
+					<field  name="peso_ingreso_cabezal"/>
+					<separator string="--------------------------------------------"/>
+				   </group>
+					
+					<h3>
+					<label colspan="4" align="0.0" string="Pesaje de Salida"/>
+					</h3>
+					<group>
+					<field  name="peso_salida_cabezal"/>
+					<field  name="peso_salida_completo"/>
+					<separator string="--------------------------------------------"/>
+					</group>
+					
+					<h3>					
+					<label colspan="4" align="0.0" string="Peso Contenedor (Kg)"/>
+					<field  name="total"/>
+					</h3>
+    			</page>
+
+			<page string="Galería" attrs="{'invisible':[('mostrar_campos_selection','=','Regular')]}">
+		
+					<field  name="imagen_uno" widget='image' options='{"size": [400, 400]}'  />
+					<field  name="imagen_dos" widget='image' options='{"size": [400, 400]}'  />
+					<field  name="imagen_tres" widget='image' options='{"size": [400, 400]}'  />
+					<field  name="imagen_cuatro" widget='image' options='{"size": [400, 400]}'  />
+					<field  name="imagen_cinco" widget='image' options='{"size": [400, 400]}'  />
+					
+					
+					
+					
+					<field  name="imagen_seis" widget='image' options='{"size": [400, 400]}'  />
+					<field  name="imagen_siete" widget='image' options='{"size": [400, 400]}'  />
+					<field  name="imagen_ocho" widget='image' options='{"size": [400, 400]}'  />
+					<field  name="imagen_nueve" widget='image' options='{"size": [400, 400]}'  />
+					<field  name="imagen_diez" widget='image' options='{"size": [400, 400]}'  />
+				   
+					
+									
+    			</page>
+			</notebook>
+
+
+    </field>
+</record>
+
+<record model="ir.ui.view" id="sale_view_quotation_tree">
+    <field name="name">sale_view_quotation_tree_heredada</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_quotation_tree"/>
+    <field name="arch" type="xml">
+        <field name="user_id" position="before">
+            <field name="numero_contenedor"/>
+			<field name="mostrar_campos_selection"/>
+			<field name="estado"/>
+        </field>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="sale_view_saleorder_tree">
+    <field name="name">sale_view_saleorder_tree_heredada</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_tree"/>
+    <field name="arch" type="xml">
+        <field name="user_id" position="before">
+            <field name="numero_contenedor"/>
+			<field name="mostrar_campos_selection"/>
+			<field name="estado"/>
+        </field>
+    </field>
+</record>
+
+<record id="vista_heredada_group_by" model="ir.ui.view">
+            <field name="name">Tipo de Factura</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter" />
+            <field name="arch" type="xml">
+               <!-- add your group at the end -->
+                <xpath expr="//filter[@string='Order Month']"
+                    position="after">
+                    <filter string="Tipo Factura" domain="[]" context="{'group_by':'mostrar_campos_selection'}"/>
+                </xpath>                                    
+                </field>
+            </record>
+
+
+    </data>
+</openerp>

@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<openerp>
+
+
+	<data>
+
+
+<!-- Action para prestamos Prueba --> 
+		<record id="libroprueba_libro_action" model="ir.actions.act_window">
+		<field name="name">Lista de Prueba</field>
+     	<field name="res_model">libro</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">Presione aquí para crear un nuevo libro de prestamos para empleados.</p>
+		</field>
+		</record>
+
+<!-- Action para prestamos Empleados --> 
+		<record id="libroprestamoempleado_libro_action" model="ir.actions.act_window">
+		<field name="name">Lista de Prestamos</field>
+     	<field name="res_model">empleado.allowance</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">Presione aquí para crear un nuevo libro de prestamos para empleados.</p>
+		</field>
+		</record>
+
+<!-- Action para prestamos Clientes --> 
+		<record id="libro_prestamo_cliente_action" model="ir.actions.act_window">
+		<field name="name">Lista de Prestamos</field>
+     	<field name="res_model">cliente.allowance</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">Presione aquí para crear un nuevo libro de prestamos para Clientes.</p>
+		</field>
+		</record>
+
+<!-- Action para prestamos por pagar --> 
+		<record id="libro_prestamo_pagar_action" model="ir.actions.act_window">
+		<field name="name">Lista de Prestamos</field>
+     	<field name="res_model">pagar.allowance</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">Presione aquí para crear un nuevo libro de prestamos por pagar.</p>
+		</field>
+		</record>
+
+
+<!-- Action Amortizables prestamo por pagar Empleado --> 
+		<record id="libroprestamo_empleado_amortizable_action" model="ir.actions.act_window">
+		<field name="name">Lista de Amortizables</field>
+     	<field name="res_model">empleado.amortizable</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">Presione aquí para crear una nueva Amortización.</p>
+		</field>
+		</record>
+
+
+<!-- Action Abono prestamo Empleado 	-->
+		<record id="libroprestamo_empleado_abono_action" model="ir.actions.act_window">
+		<field name="name">Lista de Abonos</field>
+     	<field name="res_model">empleado.abono</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">Presione aquí para crear un nuevo abono.</p>
+		</field>
+		</record>
+	
+
+<!-- Form view  Test libro --> 
+	<record id="prestamo_libro_form_view" model="ir.ui.view">
+		<field name="name">libro.amortizable.empleado.form.view</field>
+		<field name="view_type">form</field>
+		<field name="model">libro</field>
+		<field name="arch" type="xml">
+			<form string="Amortizable">
+			<field  name="hoja_ids" string="Fecha"/>
+			<field  name="campo_hoja"/>
+			<button name="action_test" type="object" class="oe_inline oe_stat_button" icon="fa-camera" string="Nuevo"/>
+
+            </form>
+		</field>
+	</record>
+
+<!-- Form view  Test Hoja --> 
+	<record id="prestamo_hoja_form_view" model="ir.ui.view">
+		<field name="name">hoja.amortizable.empleado.form.view</field>
+		<field name="view_type">form</field>
+		<field name="model">hoja</field>
+		<field name="arch" type="xml">
+			<form string="Amortizable">
+			<field  name="campito" string="campito"/>
+			<field  name="libro_id"/>
+
+            </form>
+		</field>
+	</record>
+
+
+<!-- Form view amortizable prestamo Empleado --> 
+	<record id="prestamo_amortizable_empleado_form_view" model="ir.ui.view">
+		<field name="name">prestamo.amortizable.empleado.form.view</field>
+		<field name="view_type">form</field>
+		<field name="model">empleado.amortizable</field>
+		<field name="arch" type="xml">
+			<form string="Amortizable">
+			<field  name="fecha" string="Fecha"/>
+			<field  name="user_id"/>
+			<field  name="monto"/>
+			<notebook colspan="4">
+				<page string="Notas">
+					<field  name="notas" nolabel="1" placeholder="Ingrese informacion adicional aqui"/>
+    			</page>
+			</notebook>
+            </form>
+		</field>
+	</record>
+
+
+
+<!-- Form view abono prestamo Empleado  --> 
+	<record id="prestamo_empleado_abono_form_view" model="ir.ui.view">
+		<field name="name">empleado.abono.form.view</field>
+		<field name="view_type">form</field>
+		<field name="model">empleado.abono</field>
+		<field name="arch" type="xml">
+			<form string="Abono">
+			<field  name="fecha"/>
+			<field  name="user_id"/>
+			<field  name="monto"/>
+			<notebook colspan="4">
+				<page string="Notas">
+					<field  name="notas" nolabel="1" placeholder="Ingrese informacion adicional aqui"/>
+    			</page>
+			</notebook>
+            </form>
+		</field>
+	</record>
+
+
+
+<!-- Form View prestamo Empleado --> 
+	<record id="prestamoempleado_libro_form_view" model="ir.ui.view">
+		<field name="name">prestamo.libro.empleado.form.view</field>
+		<field name="view_type">form</field>
+		<field name="model">empleado.allowance</field>
+		<field name="arch" type="xml">
+	<form string="Libro"  version="7.0">
+	<header>
+     		<button name="mymod_assigned" string="Primer Paso" states="nada" class="oe_highlight" type="workflow" />
+      		<button name="mymod_assigned" string="Procesado" states="new" class="oe_highlight" type="workflow" />
+ 		<field name="state" widget="statusbar"  statusbar_colors='{"new":"blue","done":"red"}'/>
+     
+         </header>
+	 <sheet string="Libro de Prestamos"> 
+			<group>
+			 <label for="name"/>
+			</group>
+			<group>
+			<field  name="res_employee_id" attrs="{'readonly': [('state','in',('done'))]}"/>
+			<field  name="detalle" attrs="{'readonly': [('state','in',('done'))]}"/>
+			<field  name="total_amortizable"/>
+			<field  name="total_abono"/>
+ 			<field  string="Saldo" name="saldo"/>
+			</group>
+		<notebook colspan="4">
+				<page string="Ingresar Abono">
+
+					<field name="abono_ids" widget="one2many_list" colspan="4" nolabel="1" attrs="{'readonly': [('state','in',('done'))]}">
+   						<tree editable="top">
+			        			<field name="responsable"/>  
+			        			<field name="fecha"/>
+			        			<field name="monto"/>
+			        			<field name="notas"/>  
+                             
+  				 		</tree>
+					</field>
+    			</page>
+				<page string="Ingresar Prestamo">
+					<field name="amortizable_ids" widget="one2many_list" colspan="4" nolabel="1" attrs="{'readonly': [('state','in',('done'))]}">
+   						<tree editable="top">
+			        			<field name="responsable"/>  
+			        			<field name="fecha"/>
+			        			<field name="monto"/>
+			        			<field name="notas"/>  
+                             
+  				 		</tree>
+					</field>
+    			</page>
+			</notebook>
+	 </sheet>
+
+            </form>		
+	</field>
+	</record>
+
+<!-- Form View prestamo cliente --> 
+	<record id="prestamocliente_libro_form_view" model="ir.ui.view">
+		<field name="name">prestamo.libro.cliente.form.view</field>
+		<field name="view_type">form</field>
+		<field name="model">cliente.allowance</field>
+		<field name="arch" type="xml">
+	<form string="Libro"  version="7.0">
+	<header>
+     		<button name="mymod_assigned" string="Primer Paso" states="nada" class="oe_highlight" type="workflow" />
+      		<button name="mymod_assigned" string="Procesado" states="new" class="oe_highlight" type="workflow" />
+ 		<field name="state" widget="statusbar"  statusbar_colors='{"new":"blue","done":"red"}'/>
+     
+         </header>
+	 <sheet string="Libro de Prestamos"> 
+			<group>
+			 <label for="name"/>
+			</group>
+			<group>
+			<field  name="res_partner_id" attrs="{'readonly': [('state','in',('done'))]}"/>
+			<field  name="detalle" attrs="{'readonly': [('state','in',('done'))]}"/>
+			<field  name="total_amortizable"/>
+			<field  name="total_abono"/>
+ 			<field  string="Saldo" name="saldo"/>
+			</group>
+		<notebook colspan="4">
+				<page string="Ingresar Abono">
+
+					<field name="abono_ids" widget="one2many_list" colspan="4" nolabel="1" attrs="{'readonly': [('state','in',('done'))]}">
+   						<tree editable="top">
+			        			<field name="responsable"/>  
+			        			<field name="fecha"/>
+			        			<field name="monto"/>
+			        			<field name="notas"/>  
+                             
+  				 		</tree>
+					</field>
+    			</page>
+				<page string="Ingresar Prestamo">
+					<field name="amortizable_ids" widget="one2many_list" colspan="4" nolabel="1" attrs="{'readonly': [('state','in',('done'))]}">
+   						<tree editable="top">
+			        			<field name="responsable"/>  
+			        			<field name="fecha"/>
+			        			<field name="monto"/>
+			        			<field name="notas"/>  
+                             
+  				 		</tree>
+					</field>
+    			</page>
+			</notebook>
+	 </sheet>
+
+            </form>		
+	</field>
+	</record>
+
+
+<!-- Form View prestamo por Pagar --> 
+	<record id="prestamopagar_libro_form_view" model="ir.ui.view">
+		<field name="name">prestamo.libro.cliente.form.view</field>
+		<field name="view_type">form</field>
+		<field name="model">pagar.allowance</field>
+		<field name="arch" type="xml">
+	<form string="Libro"  version="7.0">
+	<header>
+     		<button name="mymod_assigned" string="Primer Paso" states="nada" class="oe_highlight" type="workflow" />
+      		<button name="mymod_assigned" string="Procesado" states="new" class="oe_highlight" type="workflow" />
+ 		<field name="state" widget="statusbar"  statusbar_colors='{"new":"blue","done":"red"}'/>
+     
+         </header>
+	 <sheet string="Libro de Prestamos"> 
+			<group>
+			 <label for="name"/>
+			</group>
+			<group>
+			<field  name="res_partner_id" attrs="{'readonly': [('state','in',('done'))]}"/>
+			<field  name="detalle" attrs="{'readonly': [('state','in',('done'))]}"/>
+			<field  name="total_amortizable"/>
+			<field  name="total_abono"/>
+ 			<field  string="Saldo" name="saldo"/>
+			</group>
+		<notebook colspan="4">
+				<page string="Ingresar Abono">
+
+					<field name="abono_ids" widget="one2many_list" colspan="4" nolabel="1" attrs="{'readonly': [('state','in',('done'))]}">
+   						<tree editable="top">
+			        			<field name="responsable"/>  
+			        			<field name="fecha"/>
+			        			<field name="monto"/>
+			        			<field name="notas"/>  
+                             
+  				 		</tree>
+					</field>
+    			</page>
+				<page string="Ingresar Prestamo">
+					<field name="amortizable_ids" widget="one2many_list" colspan="4" nolabel="1" attrs="{'readonly': [('state','in',('done'))]}">
+   						<tree editable="top">
+			        			<field name="responsable"/>  
+			        			<field name="fecha"/>
+			        			<field name="monto"/>
+			        			<field name="notas"/>  
+                             
+  				 		</tree>
+					</field>
+    			</page>
+			</notebook>
+	 </sheet>
+
+            </form>		
+	</field>
+	</record>
+
+<!-- Tree View prestamo Empleado  -->
+	<record id="prestamo_empleado_libro_tree_view" model="ir.ui.view">
+		<field name="name">prestamo_empleado.libro.tree.view</field>
+		<field name="view_type">tree</field>
+		<field name="model">empleado.allowance</field>
+		<field name="arch" type="xml">
+			<tree string="Libro">
+			<field  name="res_employee_id"/>
+			<field  name="detalle"/>
+			<field  name="saldo" sum="True"/>
+			<field  name="total_amortizable" sum="True" string="Total Prestamos" widget="monetary"/>
+			<field  name="state"/>
+            </tree>
+		</field>
+	</record>
+
+<!-- Tree View prestamo Cliente  -->
+	<record id="prestamo_cliente_libro_tree_view" model="ir.ui.view">
+		<field name="name">prestamo_cliente.libro.tree.view</field>
+		<field name="view_type">tree</field>
+		<field name="model">cliente.allowance</field>
+		<field name="arch" type="xml">
+			<tree string="Libro">
+			<field  name="res_partner_id"/>
+			<field  name="detalle"/>
+			<field  name="saldo" sum="True"/>
+			<field  name="total_amortizable" sum="True" string="Total Prestamos" widget="monetary"/>
+			<field  name="state"/>
+            </tree>
+		</field>
+	</record>
+
+<!-- Tree View prestamo por Pagar  -->
+	<record id="prestamo_pagar_libro_tree_view" model="ir.ui.view">
+		<field name="name">prestamo_pagar.libro.tree.view</field>
+		<field name="view_type">tree</field>
+		<field name="model">pagar.allowance</field>
+		<field name="arch" type="xml">
+			<tree string="Libro">
+			<field  name="res_partner_id"/>
+			<field  name="detalle"/>
+			<field  name="saldo" sum="True"/>
+			<field  name="total_amortizable" sum="True" string="Total Prestamos" widget="monetary"/>
+			<field  name="state"/>
+            </tree>
+		</field>
+	</record>
+
+<!-- Search View prestamo Clientes --> 
+	<record id="prestamo_libro_search_view" model="ir.ui.view">
+		<field name="name">prestamo.search</field>
+		<field name="model">cliente.allowance</field>
+		<field name="arch" type="xml">
+			<search string="Libro">
+			<field  name="res_partner_id"/>
+			<group string="Agrupar Por">
+			<filter string="Cliente" name="res_partner_id" domain="[]" context="{'group_by':'res_partner_id'}"/>
+			<filter string="Estado" name="state" domain="[]" context="{'group_by':'state'}"/>
+			</group>
+			</search>
+		</field>
+	</record>
+
+
+<!-- Search View prestamo Empleado --> 
+	<record id="prestamo_empleado_search_view" model="ir.ui.view">
+		<field name="name">prestamo.search</field>
+		<field name="model">empleado.allowance</field>
+		<field name="arch" type="xml">
+			<search string="Libro">
+			<field  name="res_employee_id"/>
+			<group string="Agrupar Por">
+			<filter string="Cliente" name="res_partner_id" domain="[]" context="{'group_by':'res_partner_id'}"/>
+			<filter string="Estado" name="state" domain="[]" context="{'group_by':'state'}"/>
+			</group>
+			</search>
+		</field>
+	</record>
+
+
+<!-- Search View prestamo Clientes --> 
+	<record id="prestamo_cliente_search_view" model="ir.ui.view">
+		<field name="name">prestamo.search</field>
+		<field name="model">pagar.allowance</field>
+		<field name="arch" type="xml">
+			<search string="Libro">
+			<field  name="res_partner_id"/>
+			<group string="Agrupar Por">
+			<filter string="Cliente" name="res_partner_id" domain="[]" context="{'group_by':'res_partner_id'}"/>
+			<filter string="Estado" name="state" domain="[]" context="{'group_by':'state'}"/>
+			</group>
+			</search>
+		</field>
+	</record>
+
+
+		
+		<!-- Menu Principal --> 
+		<menuitem id="libroprestamo" name="Libro de Prestamos"/>
+
+		<!-- Menu para prestamos Empleados --> 
+		<menuitem id="libroprestamo_menu_empleado" name="Prestamos Empleados" parent= "libroprestamo"/>
+		<menuitem id="libro_prestamo_por_empleado_libro_menu" 
+				name="Libro Prestamos" 
+				parent="libroprestamo_menu_empleado"
+				action="libroprestamoempleado_libro_action"
+        />
+
+		<!-- Menu para prestamos Clientes -->
+		<menuitem id="libro_prestamo_menu_cliente" name="Prestamos Clientes" parent= "libroprestamo"/> 
+		<menuitem id="libro_prestamo_cliente_menu" 
+				name="Libro Prestamos" 
+				parent="libro_prestamo_menu_cliente"
+				action="libro_prestamo_cliente_action"
+        />
+
+		<!-- Menu para prestamos por Pagar -->
+		<menuitem id="libro_prestamo_menu_pagar" name="Prestamos por Pagar" parent= "libroprestamo"/> 
+		<menuitem id="libro_prestamo_pagar_menu" 
+				name="Libro Prestamos" 
+				parent="libro_prestamo_menu_pagar"
+				action="libro_prestamo_pagar_action"
+        />
+
+		<!-- Menu para Prueba -->
+		<menuitem id="libro_prestamo_menu_pagar_prueba" name="Prueba" parent= "libroprestamo"/> 
+		<menuitem id="libro_prestamo_pagar_menu_prueba" 
+				name="Libro Prestamos" 
+				parent="libro_prestamo_menu_pagar_prueba"
+				action="libroprueba_libro_action"
+        />
+
+	</data>
+</openerp>

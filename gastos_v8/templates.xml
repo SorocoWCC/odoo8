@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<openerp>
+
+
+	<data>
+
+<!-- Action gasto --> 
+		<record id="gasto_action" model="ir.actions.act_window">
+		<field name="name">Lista de Gastos</field>
+     	<field name="res_model">gasto</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">Presione aquí para crear un nuevo Gasto.</p>
+		</field>
+		</record>
+
+<!--Form View Cierre de Caja-->
+	<record id="gasto_form_view" model="ir.ui.view">
+	<field name="name">gasto.form.view</field>
+		<field name="view_type">form</field>
+		<field name="model">gasto</field>
+		<field name="arch" type="xml">
+			<form string="Gasto"  version="7.0">
+			<header>	
+ 	<button name="mymod_assigned" string="Procesado" states="new" class="oe_highlight" type="workflow" />
+ 	<field name="state" widget="statusbar"  statusbar_colors='{"new":"blue","done":"red"}'/>
+
+
+            </header>
+			<sheet string="Gastos">
+	<group >			
+			<group>
+			<field  name="name" attrs="{'readonly': [('state','in',('done'))]}" />
+			<field  name="monto" attrs="{'readonly': [('state','in',('done'))]}" />
+			</group>
+
+			<group >
+			<field  name="responsable"/>
+			</group>
+					
+			<group>
+			<field  name="fecha"  attrs="{'readonly': [('state','in',('done'))]}"/>
+<!--			<field name="cierre_id" />
+-->
+			</group>
+
+	</group>
+				<notebook >
+				<page string="Informacion Adicional">
+				<field name="notas" attrs="{'readonly': [('state','in',('done'))]}"/>  
+
+    			</page>
+			</notebook>
+			</sheet>
+  			<div class="oe_chatter">
+
+      		</div>
+						
+            </form>
+		</field>
+	</record>
+
+<!--Tree View Gasto-->
+<record id="gasto_tree_view" model="ir.ui.view">
+		<field name="name">gasto.tree.view</field>
+		<field name="view_type">tree</field>
+		<field name="model">gasto</field>
+		<field name="arch" type="xml">
+			<tree string="Gastos" colors="blue:state == 'new';black:state in ('done');gray:state == 'none'">
+			<field name="name" />
+			<field  name="responsable"/>
+			<field  name="fecha"/>
+			<field  name="monto" sum="True"/>
+			<field  name="state" string="Estado"/>
+            </tree>
+		</field>
+	</record>
+
+<!--Group by Cajero-->
+	<record id="gasto_search_view" model="ir.ui.view">
+		<field name="name">gasto.search</field>
+		<field name="model">gasto</field>
+		<field name="arch" type="xml">
+			<search string="Gastos">
+
+			<group string="Agrupar Por">
+			<filter string="Fecha"  icon="terp-go-today" context="{'group_by':'fecha'}" help="Agrupar por Fecha"/>
+			<filter string="Responsable" icon="terp-go-today" context="{'group_by':'responsable'}" help="Agrupar por Cajero"/>
+			<filter string="Estado" icon="terp-go-today" context="{'group_by':'state'}" help="Agrupar por Estado"/>
+			</group>
+			</search>
+		</field>
+	</record>
+
+		<menuitem id="gasto" name="Gastos"/>
+		<menuitem id="gasto_menu" name="Nuevo Gasto" parent= "gasto"/>	
+		<menuitem id="libroprestamo_libro_menu" 
+				name="Gastos" 
+				parent="gasto_menu"
+				action="gasto_action"
+        />
+
+	</data>
+</openerp>
