@@ -254,6 +254,7 @@
 		<page string="Validación">
 			<group>
 				<field  name="sumar_validacion" />
+				<field  name="precio_venta_informe" />
 			</group>				   
 		</page>
 	</notebook>

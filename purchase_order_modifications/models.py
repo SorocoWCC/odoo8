@@ -9,7 +9,8 @@ from openerp.exceptions import Warning
 class product(models.Model):
     _name = 'product.template'
     _inherit = 'product.template'
-    sumar_validacion = fields.Boolean (string='NO sumar en validación')
+    sumar_validacion = fields.Boolean (string='NO sumar en validación:')
+    precio_venta_informe = fields.Float (string = 'Precio de Venta Informe:')	
 
 # ----------------------------  FIN HEREDADA - PRODUCTO ------------------------------------
 
@@ -95,7 +96,7 @@ class purchase_order(models.Model):
 			if peso > float(self.peso_lleno) or float(self.peso_lleno) == 0 or float(self.peso_vacio) == 0 :
 				raise Warning ("Error en los pesos (Productos - Peso lleno - Peso Vacio)")			
 
-       # self.state= 'confirmed'
+        self.state= 'confirmed'
 
 
 # Marcar la factura como pagada
