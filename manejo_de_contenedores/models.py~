@@ -19,11 +19,46 @@ class contenedor(models.Model):
     peso_salida_completo = fields.Integer(string="Contenedor Completo (kg)")
     total = fields.Float(compute='_compute_total', store=True, string="Peso contenedor(kg)")
     imagen_uno = fields.Binary ()
+    imagen_dos = fields.Binary ()
+    imagen_tres = fields.Binary ()
+    imagen_cuatro = fields.Binary ()
+    imagen_cinco = fields.Binary ()
+    imagen_seis = fields.Binary ()
+    imagen_siete = fields.Binary ()
+    imagen_ocho = fields.Binary ()
+    imagen_nueve = fields.Binary ()
+    imagen_diez = fields.Binary ()
 
 
     @api.one
     @api.depends('peso_salida_completo', 'peso_ingreso_completo', 'peso_ingreso_cabezal', 'peso_salida_cabezal')
     def _compute_total(self):
-	    self.total = float(self.peso_salida_completo - ((self.peso_ingreso_completo - self.peso_ingreso_cabezal) + self.peso_salida_cabezal))
+	res= self.env['product.template'].search([('name', '=', 'Chatarra')])
+	order_line = self.order_line
+	total = float(self.peso_salida_completo - ((self.peso_ingreso_completo - self.peso_ingreso_cabezal) + self.peso_salida_cabezal))
+
+	if "New" not in str(self.id):
+		if len(order_line) == 0 and self.peso_salida_completo > 0 and self.peso_ingreso_completo > 0 and self.peso_ingreso_cabezal > 0 and self.peso_salida_cabezal > 0:
+			self.order_line.create({'name':str(res.name), 'order_id':self.id, 'product_uom_qty':float(total), 'product_id': int(res.id)})
+	self.total = float(self.peso_salida_completo - ((self.peso_ingreso_completo - self.peso_ingreso_cabezal) + self.peso_salida_cabezal))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
