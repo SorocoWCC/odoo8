@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<openerp>
+	<data>
+<!-- Action Vehiculo --> 
+		<record id="vehiculo_action" model="ir.actions.act_window">
+		<field name="name">Lista de Vehiculos</field>
+     	<field name="res_model">flotilla.vehiculo</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">Presione aquí para crear un nuevo Vehiculo.</p>
+		</field>
+		</record>
+
+
+<!--Form View Vehiculo-->
+	<record id="vehiculo_form_view" model="ir.ui.view">
+	<field name="name">vehiculo.form.view</field>
+		<field name="view_type">form</field>
+		<field name="model">flotilla.vehiculo</field>
+		<field name="arch" type="xml">
+			<form string="Vehiculo"  version="7.0">
+
+			<sheet string="Vehiculo">
+ 						<field name="imagen_vehiculo" widget='image' class="oe_left oe_avatar"/>
+ 						<div class="oe_title">
+                            <h1>
+                            <label string="Placa"/>
+                            <field name="placa" class="oe_inline"/>
+                            </h1>
+                            
+                        </div>
+	<group>			
+			<group >
+			</group>
+
+			<group >
+			
+			</group>
+					
+			<group string="Propiedades Generales">
+            <field name="motor" class="oe_inline" />
+            <field name="chasis" class="oe_inline" />
+            <field name="peso" class="oe_inline" />
+			</group>
+
+						
+			<group string="Cambio de Aceite">
+            <field name="filtro_aceite" string="Tipo de Filtro de Aceite" />
+            <field name="periodo_cambio_aceite" string="Período Cambio Aceite (dias)" />
+			</group>		
+	</group>
+				
+			</sheet>
+			
+			
+            </form>
+		</field>
+	</record>
+
+
+<!-- Form Vista Heredada de Gasto-->
+
+<record model="ir.ui.view" id="gasto_tipo_view_form">
+    <field name="name">gasto_tipo_view_form_inherit</field>
+    <field name="model">gasto</field>
+    <field name="inherit_id" ref="gastos_v8.gasto_form_view"/>
+    <field name="arch" type="xml">
+        <field name="responsable" position="after">
+			<field name="tipo_gasto" attrs="{'readonly': [('state','in',('done'))]}"/>
+			<field name="vehiculo_id" attrs="{'invisible':[('tipo_gasto','=','regular')], 'readonly': [('state','in',('done'))]}"/>
+
+        </field>
+    </field>
+</record>
+
+
+<!-- Menus -->
+	<menuitem id="flotilla" name="Flotilla"/>
+	<menuitem id="vehiculo_menu" name="Flotilla" parent= "flotilla"/>	
+	<menuitem id="flotilla_menu" 
+		  name="Vehiculos" 
+		  parent="vehiculo_menu"
+		  action="vehiculo_action"
+        />
+	
+	</data>
+</openerp>
