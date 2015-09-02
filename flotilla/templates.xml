@@ -52,7 +52,11 @@
             <field name="periodo_cambio_aceite" string="Período Cambio Aceite (dias)" />
 			</group>		
 	</group>
-				
+			<notebook >
+            <page string="Cambios de Aceite">
+            <field name="gasto_ids"/>			
+            </page>	
+           		 </notebook >	
 			</sheet>
 			
 			

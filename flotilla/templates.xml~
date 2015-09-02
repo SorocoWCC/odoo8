@@ -28,7 +28,7 @@
  						<div class="oe_title">
                             <h1>
                             <label string="Placa"/>
-                            <field name="placa" class="oe_inline"/>
+                            <field name="name" class="oe_inline"/>
                             </h1>
                             
                         </div>
@@ -52,7 +52,11 @@
             <field name="periodo_cambio_aceite" string="Período Cambio Aceite (dias)" />
 			</group>		
 	</group>
-				
+			<notebook >
+            <page string="Cambios de Aceite">
+            <field name="gasto_ids"  domain="[('tipo_gasto', '=', 'aceite')]"/>			
+            </page>	
+           		 </notebook >	
 			</sheet>
 			
 			

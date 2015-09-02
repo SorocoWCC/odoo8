@@ -19,6 +19,7 @@ class vehiculo(models.Model):
     peso = fields.Integer(string='Peso')
     notas= fields.Text(string='Notas')
     periodo_cambio_aceite = fields.Integer(string='Perido Cambio de Aceite (dias)', required=True)
+    gasto_ids = fields.One2many(comodel_name='gasto', inverse_name='vehiculo_id', string="Gastos", domain=[('tipo_gasto', '=', 'aceite')])
     _defaults = { 
     'periodo_cambio_aceite': 90,
     }
