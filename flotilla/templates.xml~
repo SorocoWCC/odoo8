@@ -50,11 +50,12 @@
 			<group string="Cambio de Aceite">
             <field name="filtro_aceite" string="Tipo de Filtro de Aceite" />
             <field name="periodo_cambio_aceite" string="Período Cambio Aceite (dias)" />
+            <field name="proximo_cambio_aceite" string="Próximo Cambio de Aceite" />
 			</group>		
 	</group>
 			<notebook >
             <page string="Cambios de Aceite">
-            <field name="gasto_ids"  domain="[('tipo_gasto', '=', 'aceite')]"/>			
+            <field name="gasto_ids"/>			
             </page>	
            		 </notebook >	
 			</sheet>

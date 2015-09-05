@@ -50,6 +50,8 @@
 			<group string="Cambio de Aceite">
             <field name="filtro_aceite" string="Tipo de Filtro de Aceite" />
             <field name="periodo_cambio_aceite" string="Período Cambio Aceite (dias)" />
+            <field name="proximo_cambio_aceite" string="Próximo Cambio de Aceite" />
+            <field name="proximo_aceite" string="asdasd" />
 			</group>		
 	</group>
 			<notebook >
